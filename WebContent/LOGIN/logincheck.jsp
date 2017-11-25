@@ -36,14 +36,11 @@
 	conn.close();
 	
 	if(validated){
-		%>
-		<jsp:forward page="../Backstage/backstage.jsp"/>
-		<%
+    	response.sendRedirect("../utf8-jsp/index.html");
+        return;        
 	}
 	else{
-		%>
-		<jsp:forward page="login.html"/>
-		<%
+		
 	}
 	
 %>
