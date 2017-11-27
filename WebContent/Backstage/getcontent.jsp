@@ -22,13 +22,13 @@
 		
 		String sql = "insert into aricle (arti_title,arti_author,arti_content,arti_date)values('"+title+"','"+author+"','"+content+"',now());";
 		
-		out.print(sql);
+		//out.print(sql);
 		Statement stmt = conn.createStatement();
 		int flag = stmt.executeUpdate(sql);
 		if(flag!=0){
-			out.print("保存成功！");
+			out.print("Save successfully!");
 		}else{
-			out.print("保存失败！");
+			out.print("Failed to save!");
 		}
 		
 		stmt.close();
