@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
+encoding//WebContent/Backstage/comment.jsp=UTF-8
 encoding//WebContent/Backstage/getcontent.jsp=UTF-8
+encoding//WebContent/Backstage/managearticle.jsp=UTF-8
 encoding//WebContent/Display/articlepage.jsp=UTF-8
 encoding//WebContent/LOGIN/logincheck.jsp=UTF-8
 encoding//WebContent/utf8-jsp=GBK
+encoding//WebContent/utf8-jsp/editorarticle.jsp=UTF-8
 encoding/<project>=UTF-8

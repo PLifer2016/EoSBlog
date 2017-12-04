@@ -1,9 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="java.sql.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <title>EoSBlog后台管理</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -17,17 +18,40 @@
     </style>
 </head>
 <body>
-<div id="top">
+	<div id="top">
 	<a href="../homepage.jsp">首页</a>
 	<a href="../Backstage/managearticle.jsp">管理文章</a>
 	<a href="../Backstage/managecomment.jsp">管理评论</a>
 </div>
 
+<%
+	String content = null;
+	request.setCharacterEncoding("UTF-8");
+	String ID = request.getParameter("ID");
+	Class.forName("com.mysql.jdbc.Driver").newInstance();
+	String url = "jdbc:mysql://localhost:3306/EoSBlog";
+	String dbAdmin = "root";
+	String dbPassword = "123456";
+	Connection conn = DriverManager.getConnection(url,dbAdmin,dbPassword);
+	
+	String sql = "select * from article where arti_ID='"+ID+"';";
+	Statement stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery(sql);
+	while(rs.next()){
+		content = rs.getString("arti_content");
+	}
+	
+	rs.close();
+	stmt.close();
+	conn.close();
+%>
 <div>
-	<form action="../Backstage/getcontent.jsp" method="post" target="_blank">
+	<form action="../Backstage/updatecontent.jsp?ID=<%=ID %>" method="post" target="_blank">
     <h1>编辑博客</h1>
    	 标题：<input type="text" name="title">
-    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+    <script id="editor" type="text/plain" style="width:1024px;height:500px;">
+	<%=content%>
+	</script>
     <input type="submit" value="OK">
     </form>
 </div>

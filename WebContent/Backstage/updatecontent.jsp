@@ -8,11 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
+<%
 		request.setCharacterEncoding("UTF-8"); 
 		String title = request.getParameter("title");
 		String content = request.getParameter("editorValue");
 		String author = "PLifer";
+		String ID = request.getParameter("ID");
 		
 		//out.println(title);
 		
@@ -22,20 +23,19 @@
 		String dbPassword = "123456";
 		Connection conn = DriverManager.getConnection(url,dbAdmin,dbPassword);
 		
-		String sql = "insert into article (arti_title,arti_author,arti_content,arti_date)values('"+title+"','"+author+"','"+content+"',now());";
+		String sql = "update article set arti_content='"+content+"' where arti_ID='"+ID+"';";
 		
 		//out.print(sql);
 		Statement stmt = conn.createStatement();
 		int flag = stmt.executeUpdate(sql);
 		if(flag!=0){
-			out.print("Save successfully!");
+			out.print("Update successfully!");
 		}else{
-			out.print("Failed to save!");
+			out.print("Failed to update!");
 		}
 		
 		stmt.close();
 		conn.close();
 	%>
-
 </body>
 </html>

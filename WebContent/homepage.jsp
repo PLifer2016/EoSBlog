@@ -15,18 +15,20 @@
 	String dbPassword = "123456";
 	Connection conn = DriverManager.getConnection(url,dbAdmin,dbPassword);
 	
-	String sql = "select * from aricle";
+	String sql = "select * from article";
 	Statement stmt = conn.createStatement();
 	ResultSet rs = stmt.executeQuery(sql);
 	while(rs.next()){
 		%>
 		<div>
-			<a href="Display/articlepage.jsp?param=<%=rs.getString("arti_ID")%>"> <%=rs.getString("arti_title") %><br></a>
+			<a href="Display/articlepage.jsp?ID=<%=rs.getString("arti_ID")%>"> <%=rs.getString("arti_title") %><br></a>
 			<%=rs.getString("arti_author") %><%=rs.getString("arti_date") %>
 		</div>
 		<%
 	}
-	
+	rs.close();
+	stmt.close();
+	conn.close();
 	%>
 </body>
 </html>
